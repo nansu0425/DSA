@@ -12,7 +12,7 @@ typedef struct _Node // 노드 구조체 정의
     struct _Node *next;
 } Node;
 
-typedef Node *Tail; // tail 정의
+typedef Node *Tail; // tail의 타입 정의
 
 Node *CreateNode(Data data, Node *next) // 노드 생성
 {
@@ -27,34 +27,19 @@ Node *CreateNode(Data data, Node *next) // 노드 생성
     return node;
 }
 
-Node *GetFirstNode(Tail tail) // 첫 번째 노드 접근
-{
-    return (tail == NULL) ? NULL : tail->next;
-}
-
-Node *GetLastNode(Tail tail) // 마지막 노드 첩근
-{
-    return (tail == NULL) ? NULL : tail;
-}
-
-Node *GetNextNode(Node *node) // 다음 노드 접근
-{
-    return (node == NULL) ? NULL : node->next;
-}
-
-Node *GetNthNode(Tail tail, int nth) // n번째 노드 접근
+Node *GetNode(Tail tail, int nth) // n번째 노드 접근
 {
     if (nth < 0 || tail == NULL) // 정의되지 않은 위치 또는 비어있는 리스트
         return NULL;
 
     if (nth == 0) // 0번 노드는 마지막 노드로 정의
-        return GetLastNode(tail);
+        return tail;
     
-    Node *cur = GetFirstNode(tail);
+    Node *cur = tail->next;
 
     while (nth > 1) // 목표 노드까지 cur을 이동
     {   
-        cur = GetNextNode(cur);
+        cur = cur->next;
         nth--;
     }
 
@@ -69,14 +54,14 @@ int Traverse(Tail tail) // 전체 노드 순회하며 출력
         return FALSE;
     }
 
-    Node *first = GetFirstNode(tail);
+    Node *first = tail->next;
     printf("%d", first->data);
-    Node *cur = GetNextNode(first);
+    Node *cur = first->next;
 
     while (cur != first) // 마지막 노드까지 출력
     {
         printf("->%d", cur->data);
-        cur = GetNextNode(cur);
+        cur = cur->next;
     }
     printf("\n");
 
@@ -92,8 +77,8 @@ int Insert(Tail *tail_ptr, Data data, int nth) // n번째 위치에 노드 삽�
         *tail_ptr = CreateNode(data, NULL);
     else
     {
-        Node *prev = GetNthNode(*tail_ptr, (nth == 0) ? 0 : nth - 1);
-        prev->next = CreateNode(data, GetNextNode(prev));
+        Node *prev = GetNode(*tail_ptr, (nth == 0) ? 0 : nth - 1);
+        prev->next = CreateNode(data, prev->next);
         if (nth == 0) *tail_ptr = prev->next; // 0번에 삽입된 노드는 마지막 노드가 된다
     }
 
@@ -105,8 +90,8 @@ int Delete(Tail *tail_ptr, int nth) // n번째 노드 삭제
     if (tail_ptr == NULL || *tail_ptr == NULL || nth < 1) // 참조 중인 tail이 없거나 비어있는 리스트, 정의되지 않은 위치
         return FALSE;
 
-    Node *prev = GetNthNode(*tail_ptr, nth - 1);
-    Node *cur = GetNextNode(prev);
+    Node *prev = GetNode(*tail_ptr, nth - 1);
+    Node *cur = prev->next;
 
     if (cur == prev) // 노드 한 개만 존재
         *tail_ptr = NULL;
@@ -115,7 +100,7 @@ int Delete(Tail *tail_ptr, int nth) // n번째 노드 삭제
         if (*tail_ptr == cur) // 삭제하려는 노드가 마지막 노드
             *tail_ptr = prev;
 
-        prev->next = GetNextNode(cur);
+        prev->next = cur->next;
     }
     free(cur);
     

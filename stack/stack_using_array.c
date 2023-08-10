@@ -110,4 +110,6 @@ int main()
 
     if (Traverse(stack) == FALSE) // 출력할 데이터가 없다
         printf("Stack is Empty");
+
+    return 0;
 }

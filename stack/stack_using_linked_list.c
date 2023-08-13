@@ -1,22 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-#define TRUE    1
-#define FALSE   0
-#define ERROR   -1
-
-typedef int Data;
-
-typedef struct _Node
-{
-    Data data;
-    struct _Node *next;
-} Node;
-
-typedef struct _Stack
-{
-    Node *top;
-} Stack;
+#include "stack_using_linked_list.h"
 
 Stack *CreateStack(void) // 스택 생성
 {

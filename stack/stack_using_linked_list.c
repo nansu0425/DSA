@@ -94,7 +94,7 @@ int Traverse(Stack *stack) // 스택의 모든 데이터를 순회화며 출력
     return TRUE;
 }
 
-int main()
+void Test()
 {
     Stack *stack = CreateStack(); // 스택 생성
     Data data;
@@ -116,5 +116,5 @@ int main()
     if (Traverse(stack) == FALSE) // 순회할 데이터가 없다
         printf("Stack is empty");
     
-    return 0;
+    free(stack);
 }

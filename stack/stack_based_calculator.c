@@ -48,7 +48,7 @@ int InfixToPostfix(char *infix) /// 중위 표기식을 후위 표기식으로 �
 				while (1)
 				{
 					Pop(stack, &op);
-					if ((char)op == '(') break;
+					if (op == '(') break;
 					postfix[j++] = (char)op;
 				}
 				break;

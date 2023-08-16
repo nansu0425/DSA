@@ -192,3 +192,21 @@ int main()
 
     return 0;
 }
+
+/*
+OUTPUT
+
+Preorder traversal: a b d e g c f 
+Inorder traversal: d b e g a c f
+Postorder traversal: d g e b f c a
+
+Preorder traversal: a c f
+Inorder traversal: a c f 
+Postorder traversal: f c a
+
+Preorder traversal: a
+Inorder traversal: a
+Postorder traversal: a
+
+Tree is empty
+*/

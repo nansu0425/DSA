@@ -99,7 +99,7 @@ int main()
 
     printf("\nundirected graph\n\n");
     print_adjacency_matrix(undirected_g);
-    delete_graph(directed_g);
+    delete_graph(undirected_g);
 
     return 0;
 }

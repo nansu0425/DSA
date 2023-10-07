@@ -7,27 +7,27 @@
 
 enum vertices // vertex array의 index
 {
-	A, B, C, D, E
+    A, B, C, D, E
 };
 
 struct edge_node // vertex의 adjacency list representation에 사용되는 node
 {
     enum vertices vertex_idx;
     struct vertex *vertex_ptr;
-	int weight;
-	struct edge_node *next;
+    int weight;
+    struct edge_node *next;
 };
 
 struct vertex
 {
-	int distance; // 이 vertex까지 최단 경로의 total weight
-	struct vertex *predecessor; // 최단 경로 tree에서 parent vertex
-	struct edge_node *head; // edge를 adjacency list로 표현
+    int distance; // 이 vertex까지 최단 경로의 total weight
+    struct vertex *predecessor; // 최단 경로 tree에서 parent vertex
+    struct edge_node *head; // edge를 adjacency list로 표현
 };
 
 struct graph
 {
-	struct vertex *vertex_arr;
+    struct vertex *vertex_arr;
 };
 
 struct graph *create_graph() // graph 생성 후 반환
